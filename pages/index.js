@@ -49,7 +49,7 @@ export default function Home() {
         </div>
 
         <div>
-          <label htmlFor="title">Body</label>
+          <label htmlFor="title">Content</label>
           <br />
           <input
             id="body"
