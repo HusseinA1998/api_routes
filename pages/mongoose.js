@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useFormik } from "formik";
 import axios from "axios";
-import { Formik, useFormik } from "formik";
 
-export default function Home() {
+const Home = (props) => {
   const [post, setPost] = useState([]);
 
   const formik = useFormik({
@@ -12,7 +12,7 @@ export default function Home() {
     },
     onSubmit: (values) => {
       axios
-        .post("/api/posts", values)
+        .post("/api/mongoose_posts", values)
         .then((response) => {
           console.log(response.data);
         })
@@ -24,7 +24,7 @@ export default function Home() {
 
   const getPosts = () => {
     axios
-      .get("/api/posts")
+      .get("/api/mongoose_posts")
       .then((response) => {
         console.log(response.data);
       })
@@ -32,10 +32,10 @@ export default function Home() {
         console.log(error);
       });
   };
+
   return (
     <div>
-      <h1>Api</h1>
-
+      <button onClick={getPosts}>Load posts</button>
       <form onSubmit={formik.handleSubmit}>
         <div>
           <label htmlFor="title">Title</label>
@@ -61,8 +61,8 @@ export default function Home() {
 
         <button type="submit">Submit</button>
       </form>
-
-      <button onClick={getPosts}>get posts</button>
     </div>
   );
-}
+};
+
+export default Home;
